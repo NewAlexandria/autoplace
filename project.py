@@ -39,9 +39,9 @@ class Project:
         try:
             img = Image.open(image)
         except OSError:
-            logging.error("Could not identify image file type")
-            return np.ones([1])
-        assert 0 <= self.x + img.width <= 999 and 0 <= self.y + img.height <= 999
+            logging.error("Could not open image file")
+            raise
+        assert 0 <= self.x + img.width <= 1000 and 0 <= self.y + img.height <= 1000
         return np.asarray(img)
 
     def map_colors(self, data):
