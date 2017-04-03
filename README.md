@@ -15,6 +15,7 @@ There are several tool stored in this repo.  They are independent tools that ser
 1. **the autoplace bot**.  A python bot that reads from a template image and maintains the target area in /r/place
 2. **console_agent**  A javascript-based loop that maintains the current look of your area.  Modify `babaevski` for your region of /r/place
 3. **tampermonkey_overlay**  Javascript code designt to run in the Tampermonkey browser extension.  Read [the original posting](https://www.reddit.com/r/place/comments/62s955/i_created_a_template_overlay_plugin_for_rplace/) for more information.
+4. coming next: focus-area prioritized maintenance, via [PlaceBot](https://github.com/grind086/PlaceBot)	
 
 ## autoplace Requirements
 * Python 3.5 or higher
