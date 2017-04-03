@@ -8,8 +8,15 @@ https://www.reddit.com/place/)? This is a way to automatically coordinate everyo
 Project owners can simply draw an image using the Place colors, specify the coordinate at which they want it, and start an autoplace server.
 Clients can then connect to servers and will automatically be given instructions for which pixels to paint and which color to paint it.
 
+# A Toolbox
 
-# Requirements
+There are several tool stored in this repo.  They are independent tools that serve different purposes:
+
+1. **the autoplace bot**.  A python bot that reads from a template image and maintains the target area in /r/place
+2. **console_agent**  A javascript-based loop that maintains the current look of your area.  Modify `babaevski` for your region of /r/place
+3. **tampermonkey_overlay**  Javascript code designt to run in the Tampermonkey browser extension.  Read [the original posting](https://www.reddit.com/r/place/comments/62s955/i_created_a_template_overlay_plugin_for_rplace/) for more information.
+
+## autoplace Requirements
 * Python 3.5 or higher
 * [Requests](https://pypi.python.org/pypi/requests)
 * [NumPy](https://pypi.python.org/pypi/numpy) (If running a server)
@@ -18,9 +25,9 @@ Clients can then connect to servers and will automatically be given instructions
 
 These can be installed manually or by running `pip3 install -r requirements.txt`
 
-# How to use
+### How to use
 1. Make sure you fulfill the requirements above
-## Server
+#### Server
 2. Create an image using the the colors available in Place ([See below](#colors))
     * If you use any other colors than the Place palette, they will be ignored. This way you can draw pictures which are not rectangular as well.
 3. Start the server with `python3 place_server.py <project name> <image> <x> <y>`
@@ -31,7 +38,7 @@ These can be installed manually or by running `pip3 install -r requirements.txt`
     * Run `python3 place_server.py -h` for help
 4. Watch the magic happen!
 
-## Client
+#### Client
 2. Obtain a host, port and project from Reddit, a friend, your grandma or the local fire department.
 3. Start the client with `python3 place_client.py <host> <port> --proj <project name>`
 4. The script will prompt you for your Reddit credentials
@@ -40,6 +47,7 @@ These can be installed manually or by running `pip3 install -r requirements.txt`
 
 # Colors
 These are the valid colors in the Place palette:
+
 * ![#ffffff](https://placehold.it/15/ffffff/000000?text=+) `#ffffff`
 * ![#e4e4e4](https://placehold.it/15/e4e4e4/000000?text=+) `#e4e4e4`
 * ![#888888](https://placehold.it/15/888888/000000?text=+) `#888888`
