@@ -47,39 +47,39 @@ var colors =  [12,13,12,13,12,13,11,12,12,11,12,11,12,13,12,12,12,11,12,11,12,13
 3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
 3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
 3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,] ;
- 
+
 var colorsABGR = [];
- 
+
 var babaevski = {
   x: 312,  /*Bottom left corner X*/
   y: 984,  /*Bottom left corner Y*/
   width: 78,  /*WIDTH OF IMAGE*/
   height: 62  /*HEIGHT OF IMAGE*/
 };
- 
+
 var perfect_timeout = 60;
- 
+
 // hooks
 var client;
 var canvasse;
 var jQuery;
- 
+
 var currentDrawPosition = 0;
 var currentLoop = 0;
- 
+
 r.placeModule("babaevski", function(e){
   client = e("client");
   canvasse = e("canvasse");
   jQuery = e("jQuery");
- 
+
   for(var i=0; i<client.palette.length; i++){
     colorsABGR[i] = client.getPaletteColorABGR(i);
   }
- 
+
   attempt();
- 
+
 });
- 
+
 function attempt(){
   console.log("tried to draw");
   var toWait = client.getCooldownTimeRemaining();
@@ -93,7 +93,7 @@ function attempt(){
     console.log("set a timeout");
   }
 }
- 
+
 function tryDrawPixel()
 {
   var toWait = client.getCooldownTimeRemaining();
@@ -102,13 +102,13 @@ function tryDrawPixel()
     currentLoop++;
     console.log("checking pixel " + currentDrawPosition);
     var targetPoint = getPoint(currentDrawPosition);
- 
+
     $.get( "/api/place/pixel.json", { x:targetPoint.x, y:targetPoint.y }, function( data )
     {
       setTimeout(function() {
         //wait an extra half second for reddits servers
- 
- 
+
+
         console.log("x" + targetPoint.x + " y"+ targetPoint.y);
         if (data.color == undefined)
           data.color = 0;
@@ -144,9 +144,9 @@ function tryDrawPixel()
     currentLoop = 0;
     console.log("set a timeout");
   }
- 
+
 }
- 
+
 function drawTestRTC(){
   for(var i=0; i < babaevski.width*babaevski.height; i++){
     if(colors[i] === -1){
@@ -156,7 +156,7 @@ function drawTestRTC(){
     canvasse.drawTileAt(targetPoint.x, targetPoint.y, colorsABGR[colors[i]]);
   }
 }
- 
+
 function getPoint(i){
   var x = i % babaevski.width;
   return {
@@ -164,9 +164,9 @@ function getPoint(i){
     y: babaevski.y + (i - x) / babaevski.width - babaevski.height
   };
 }
- 
+
 function getPixel(x, y){
   return canvasse.writeBuffer[canvasse.getIndexFromCoords(x, y)];
 }
- 
+
 //Updated by haydnG (hayhay)
